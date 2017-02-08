@@ -8,7 +8,7 @@ class ProjectModel(QSqlTableModel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.setTable('project')
+        self.setTable('projects')
 
         headers = [
             'ID',
