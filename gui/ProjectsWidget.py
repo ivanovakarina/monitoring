@@ -62,7 +62,7 @@ class ProjectsWidget(QWidget, Ui_Form):
         if state:
             self.projectsView.resizeColumnsToContents()
 
-    def add_new_note(self):
+    def add_new_project(self):
         self.__open_edit_dialog()
 
     def edit_project(self, index):

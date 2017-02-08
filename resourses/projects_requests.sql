@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS note (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    project_name TEXT NOT NULL,
+    project_status BOOLEAN NOT NULL,
+    repeat_time TEXT NOT NULL,
+    request_status TINYINT NOT NULL DEFAULT 0,
+    last_check_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

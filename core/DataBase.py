@@ -4,7 +4,7 @@ from PyQt5.QtCore import QObject, QFile
 from PyQt5.QtSql import QSqlDatabase, QSqlQuery
 
 SCHEMA = 'resourses/schema.sql'
-DATABASE_NAME = 'projects.sqlite'
+DATABASE_NAME = 'monitoring.sqlite'
 
 
 class DataBase(QObject):

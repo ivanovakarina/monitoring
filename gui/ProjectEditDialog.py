@@ -1,10 +1,12 @@
 # coding: utf-8
 
-from PyQt5.QtCore import pyqtSignal, QDateTime
+from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QDialog, QDataWidgetMapper
 # from PyQt5.uic import loadUi
 
 from .ui.Ui_ProjectEditDialog import Ui_Dialog
+from .ui.Ui_RequestEditDialog import Ui_RequestDialog
+from gui.RequestEditDialog import RequestEditDialog
 
 
 class ProjectEditDialog(QDialog, Ui_Dialog):
@@ -15,6 +17,7 @@ class ProjectEditDialog(QDialog, Ui_Dialog):
 
         self.init_ui()
         self.init_model(model)
+        self.init_signals()
 
         if row is None:
             # работаем в режиме добавления
@@ -38,12 +41,13 @@ class ProjectEditDialog(QDialog, Ui_Dialog):
     def init_model(self, model):
         self.__model = model
 
-#        self.__mapper = QDataWidgetMapper(self)
-#        self.__mapper.setModel(self.__model)
-#        self.__mapper.setSubmitPolicy(QDataWidgetMapper.ManualSubmit)
-#        self.__mapper.addMapping(self.titleEdit, 1)
-#        self.__mapper.addMapping(self.plannedDateTimeEdit, 2)
-#        self.__mapper.addMapping(self.contentEdit, 3)
+        self.__mapper = QDataWidgetMapper(self)
+        self.__mapper.setModel(self.__model)
+        self.__mapper.setSubmitPolicy(QDataWidgetMapper.ManualSubmit)
+        self.__mapper.addMapping(self.titleEdit, 1)
+        self.__mapper.addMapping(self.activateCheckRadioButton, 2)
+        self.__mapper.addMapping(self.timeLineEdit, 3)
+
 
     def accept(self): # это стандартный метод
         super().accept()
@@ -57,6 +61,30 @@ class ProjectEditDialog(QDialog, Ui_Dialog):
         self.__model.revertAll()
 
     def init_signals(self):
-        self.loginWidget.loginPasswordRight.connect(
-            self.closeLoginWindow
+        self.addRequestToolButton.clicked.connect(self.__onClickAddRequest)
+        self.cancelPushButton.clicked.connect(self.onClickCancel)
+        self.okPushButton.clicked.connect(self.onClickOk)
+
+    def __onClickAddRequest(self, row=None, title=None):
+            d = RequestEditDialog(model=self.__model, row=row, parent=self)
+            d.readyRequest.connect(self.on_ready)
+
+            if title:
+                d.setWindowTitle(title)
+
+            d.exec_()
+
+
+    def on_ready(self, state, row):
+        self.projectsView.setCurrentIndex(
+            self.__model.index(row, 0)
         )
+
+        if state:
+            self.projectsView.resizeColumnsToContents()
+
+    def onClickCancel(self):
+        pass
+
+    def onClickOk(self):
+        pass

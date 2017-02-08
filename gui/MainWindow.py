@@ -6,6 +6,7 @@ from .ui.Ui_MainWindow import Ui_MainWindow
 from .ProjectsWidget import ProjectsWidget
 from core.ProjectModel import ProjectModel
 from .LoginWidget import LoginWidget
+from .ProjectEditDialog import ProjectEditDialog
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -31,6 +32,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.stackedWidget.addWidget(self.projectsWidget)
         self.projectsWidget.setHidden(True)
 
+#        self.projectEditDialog = ProjectEditDialog(self)
+#        self.stackedWidget.addWidget(self.projectEditDialog)
+#        self.projectEditDialog.setHidden(True)
+
 
     def init_signals(self):
         self.loginWidget.loginPasswordRight.connect(
@@ -53,7 +58,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def init_signals_all(self):
         self.actionAdd.triggered.connect(
-            self.projectsWidget.add_new_note
+            self.projectsWidget.add_new_project
         )
         self.actionExit.triggered.connect(self.close)
 
