@@ -25,7 +25,6 @@ class RequestEditDialog(QDialog, Ui_RequestDialog):
             self.__mapper.setCurrentIndex(row)
 
     def init_ui(self):
-        # loadUi('ui/notes_edit_dialog.ui', self)
         self.setupUi(self)
 
     def init_model(self, model):
@@ -38,3 +37,34 @@ class RequestEditDialog(QDialog, Ui_RequestDialog):
         self.__mapper.addMapping(self.postCheckBox, 2)
         self.__mapper.addMapping(self.bodyPlainTextEdit, 3)
 #тут нужен внешний ключ к другой таблицу        self.__mapper.addMapping(self.)
+
+    def accept(self):  # это стандартный метод
+
+        super().accept()
+        self.__mapper.submit()           # отправляем данные в модель
+        state = self.__model.submitAll() # отправить изменения в БД
+        self.readyRequest.emit(state, self.__mapper.currentIndex())
+
+    def reject(self): # это стандартный метод
+        super().reject()
+        self.__mapper.revert()
+        self.__model.revertAll()
+
+    def __onClickAddRequest(self, row=None, title=None):
+        #
+        d = RequestEditDialog(model=self.__model, row=row, parent=self)
+        d.readyRequest.connect(self.on_ready)
+
+        if title:
+            d.setWindowTitle(title)
+
+        d.exec_()
+
+
+    def on_ready(self, state, row):
+        self.projectsView.setCurrentIndex(
+            self.__model.index(row, 0)
+        )
+
+        if state:
+            self.projectsView.resizeColumnsToContents()

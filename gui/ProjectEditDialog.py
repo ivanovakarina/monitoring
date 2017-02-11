@@ -6,8 +6,10 @@ from PyQt5.QtWidgets import QDialog, QDataWidgetMapper
 
 from .ui.Ui_ProjectEditDialog import Ui_Dialog
 from .ui.Ui_RequestEditDialog import Ui_RequestDialog
-from gui.RequestEditDialog import RequestEditDialog
+from .RequestEditDialog import RequestEditDialog
 from core.RequestModel import RequestModel
+from .RequestsWidget import RequestsWidget
+
 
 
 
@@ -30,15 +32,12 @@ class ProjectEditDialog(QDialog, Ui_Dialog):
             self.__mapper.setCurrentIndex(row)
 
     def init_ui(self):
-        # loadUi('ui/notes_edit_dialog.ui', self)
         self.setupUi(self)
 
-        #self.plannedDateTimeEdit.setMinimumDate(
-        #    QDateTime.currentDateTime().date()
-        #)
-        #self.plannedDateTimeEdit.setDateTime(
-        #    QDateTime.currentDateTime()
-        #)
+       # self.requestsWidget = RequestsWidget(self)
+       # self.widgetForRequests.addWidget(self.requestsWidget)
+       # self.widgetForRequests.setCurrentWidget(self.requestsWidget)
+
 
     def init_model(self, model):
         self.__model = model
@@ -79,12 +78,12 @@ class ProjectEditDialog(QDialog, Ui_Dialog):
 
 
     def on_ready(self, state, row):
-        self.projectsView.setCurrentIndex(
+        self.requestsView.setCurrentIndex(
             self.__model.index(row, 0)
         )
 
         if state:
-            self.projectsView.resizeColumnsToContents()
+            self.requestsView.resizeColumnsToContents()
 
     def onClickCancel(self):
         self.__mapper.revert()

@@ -6,7 +6,10 @@ from PyQt5.QtWidgets import QWidget
 from .ui.Ui_ProjectsWidget import Ui_Form
 
 from core.ProjectModel import ProjectModel
+
 from gui.ProjectEditDialog import ProjectEditDialog
+
+from .RequestsWidget import RequestsWidget
 
 
 class ProjectsWidget(QWidget, Ui_Form):
@@ -17,13 +20,17 @@ class ProjectsWidget(QWidget, Ui_Form):
 
         self.__init_model(model)
         self.__init_ui()
-        self.__init_signals()
+        #self.__init_signals()
 
     def __init_ui(self):
         self.setupUi(self)
 
-        self.projectsView.setModel(self.__model)
-        self.projectsView.resizeColumnsToContents()
+        #self.requestsWidget = RequestsWidget(self)
+        #self.stackedWidget.addWidget(self.requestsWidget)
+        #self.stackedWidget.setCurrentWidget(self.requestsWidget)
+
+        #self.projectsView.setModel(self.__model)
+        #self.projectsView.resizeColumnsToContents()
 
     def __init_signals(self):
         self.projectsView.doubleClicked.connect(self.edit_project)
