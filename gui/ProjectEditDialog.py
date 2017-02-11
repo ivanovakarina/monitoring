@@ -34,9 +34,9 @@ class ProjectEditDialog(QDialog, Ui_Dialog):
     def init_ui(self):
         self.setupUi(self)
 
-       # self.requestsWidget = RequestsWidget(self)
-       # self.widgetForRequests.addWidget(self.requestsWidget)
-       # self.widgetForRequests.setCurrentWidget(self.requestsWidget)
+        self.requestsWidget = RequestsWidget(self)
+        self.stackedWidget.addWidget(self.requestsWidget)
+        self.stackedWidget.setCurrentWidget(self.requestsWidget)
 
 
     def init_model(self, model):
@@ -61,30 +61,6 @@ class ProjectEditDialog(QDialog, Ui_Dialog):
 #        self.__mapper.revert()
 #        self.__model.revertAll()
 
-    def init_signals(self):
-        self.addRequestToolButton.clicked.connect(self.__onClickAddRequest)
-        self.cancelPushButton.clicked.connect(self.onClickCancel)
-        self.okPushButton.clicked.connect(self.onClickOk)
-
-    def __onClickAddRequest(self, row=None, title=None):
-        #
-        d = RequestEditDialog(model=self.__model, row=row, parent=self)
-        d.readyRequest.connect(self.on_ready)
-
-        if title:
-            d.setWindowTitle(title)
-
-        d.exec_()
-
-
-    def on_ready(self, state, row):
-        self.requestsView.setCurrentIndex(
-            self.__model.index(row, 0)
-        )
-
-        if state:
-            self.requestsView.resizeColumnsToContents()
-
     def onClickCancel(self):
         self.__mapper.revert()
         self.__model.revertAll()
@@ -93,3 +69,13 @@ class ProjectEditDialog(QDialog, Ui_Dialog):
         self.__mapper.submit()  # отправляем данные в модель
         state = self.__model.submitAll()  # отправить изменения в БД
         self.ready.emit(state, self.__mapper.currentIndex())
+
+    def init_signals(self):
+        self.addRequestToolButton.clicked.connect(self.__onClickAddRequest)
+        self.cancelPushButton.clicked.connect(self.onClickCancel)
+        self.okPushButton.clicked.connect(self.onClickOk)
+
+    def __onClickAddRequest(self):
+        self.requestsWidget.add_new_request() #проверить нужны скобки или нет
+
+

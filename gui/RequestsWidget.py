@@ -46,7 +46,7 @@ class RequestsWidget(QWidget, Ui_ReqForm):
     #d - локальная переменная, уничтожится при закрытии диалога
     def __open_edit_dialog(self, row = None, title = None):
         d = RequestEditDialog(model=self.__model, row = row, parent=self)
-        d.ready.connect(self.on_ready_req)
+        d.readyRequest.connect(self.on_ready_req)
 
         if title:
             d.setWindowTitle(title)

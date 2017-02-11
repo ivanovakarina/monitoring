@@ -50,21 +50,3 @@ class RequestEditDialog(QDialog, Ui_RequestDialog):
         self.__mapper.revert()
         self.__model.revertAll()
 
-    def __onClickAddRequest(self, row=None, title=None):
-        #
-        d = RequestEditDialog(model=self.__model, row=row, parent=self)
-        d.readyRequest.connect(self.on_ready)
-
-        if title:
-            d.setWindowTitle(title)
-
-        d.exec_()
-
-
-    def on_ready(self, state, row):
-        self.projectsView.setCurrentIndex(
-            self.__model.index(row, 0)
-        )
-
-        if state:
-            self.projectsView.resizeColumnsToContents()

@@ -2,13 +2,12 @@
 
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QWidget
-# from PyQt5.uic import loadUi
 from .ui.Ui_ProjectsWidget import Ui_Form
 
 from core.ProjectModel import ProjectModel
 
 from gui.ProjectEditDialog import ProjectEditDialog
-
+#зачем тут следующее?
 from .RequestsWidget import RequestsWidget
 
 
@@ -24,10 +23,6 @@ class ProjectsWidget(QWidget, Ui_Form):
 
     def __init_ui(self):
         self.setupUi(self)
-
-        #self.requestsWidget = RequestsWidget(self)
-        #self.stackedWidget.addWidget(self.requestsWidget)
-        #self.stackedWidget.setCurrentWidget(self.requestsWidget)
 
         self.projectsView.setModel(self.__model)
         self.projectsView.resizeColumnsToContents()
