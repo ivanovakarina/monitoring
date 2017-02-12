@@ -40,6 +40,8 @@ class ProjectsWidget(QWidget, Ui_Form):
 
     def __init_model(self, model):
         if isinstance(model, ProjectModel):
+            print(type(ProjectModel), "ProjectModel")
+            print(type(model), "model")
             self.__model = model
             self.__model.select()
         else:

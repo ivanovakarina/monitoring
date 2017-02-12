@@ -34,12 +34,13 @@ class ProjectEditDialog(QDialog, Ui_Dialog):
     def init_ui(self):
         self.setupUi(self)
 
-        self.requestsWidget = RequestsWidget(self)
+        self.requestsWidget = RequestsWidget(RequestModel(self), self)
         self.stackedWidget.addWidget(self.requestsWidget)
         self.stackedWidget.setCurrentWidget(self.requestsWidget)
 
 
     def init_model(self, model):
+        print(type(model), 'PeEdD')
         self.__model = model
 
         self.__mapper = QDataWidgetMapper(self)

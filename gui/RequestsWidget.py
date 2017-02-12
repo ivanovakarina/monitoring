@@ -36,6 +36,8 @@ class RequestsWidget(QWidget, Ui_ReqForm):
         )
 
     def __init_model(self, model):
+        print(type(RequestModel), "RequestModel")
+        print(type(model), "model")
         if isinstance(model, RequestModel):
             self.__model = model
             self.__model.select()
