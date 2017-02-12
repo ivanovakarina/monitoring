@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>405</width>
-    <height>256</height>
+    <width>487</width>
+    <height>320</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,10 +43,30 @@
      <item row="2" column="1">
       <widget class="QPlainTextEdit" name="bodyPlainTextEdit"/>
      </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Заголовки</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QPlainTextEdit" name="headersPlainTextEdit"/>
+     </item>
     </layout>
    </item>
    <item>
+    <widget class="QRadioButton" name="reqActivityStatusRadioButton">
+     <property name="text">
+      <string>Использовать запрос в тестировании</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>

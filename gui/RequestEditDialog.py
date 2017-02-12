@@ -3,9 +3,8 @@
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QDialog, QDataWidgetMapper
 
-
 from .ui.Ui_RequestEditDialog import Ui_RequestDialog
-
+from PyQt5.QtSql import QSqlQuery
 
 class RequestEditDialog(QDialog, Ui_RequestDialog):
     readyRequest = pyqtSignal(bool, int, name='readyRequest')
@@ -36,7 +35,8 @@ class RequestEditDialog(QDialog, Ui_RequestDialog):
         self.__mapper.addMapping(self.uRLLineEdit, 1)
         self.__mapper.addMapping(self.postCheckBox, 2)
         self.__mapper.addMapping(self.bodyPlainTextEdit, 3)
-#тут нужен внешний ключ к другой таблицу        self.__mapper.addMapping(self.)
+
+#тут нужен внешний ключ к другой таблице        self.__mapper.addMapping(self.)
 
     def accept(self):  # это стандартный метод
 

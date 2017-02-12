@@ -40,7 +40,6 @@ class ProjectEditDialog(QDialog, Ui_Dialog):
 
 
     def init_model(self, model):
-        print(type(model), 'PeEdD')
         self.__model = model
 
         self.__mapper = QDataWidgetMapper(self)
@@ -77,6 +76,7 @@ class ProjectEditDialog(QDialog, Ui_Dialog):
         self.okPushButton.clicked.connect(self.onClickOk)
 
     def __onClickAddRequest(self):
+        print(self.__model.select(project_name), 'select')
         self.requestsWidget.add_new_request() #проверить нужны скобки или нет
 
 
